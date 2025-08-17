@@ -1,4 +1,4 @@
-import 'package:cineapp/presentation/screens/movies/home_screen.dart';
+import 'package:cineapp/presentation/screens/home_screen.dart';
 import 'package:go_router/go_router.dart';
 
 final appRouter = GoRouter(

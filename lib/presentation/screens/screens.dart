@@ -1,1 +1,1 @@
-export 'package:cineapp/presentation/screens/movies/home_screen.dart';
+export 'package:cineapp/presentation/screens/home_screen.dart';
