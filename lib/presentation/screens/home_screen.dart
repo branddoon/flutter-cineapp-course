@@ -1,4 +1,5 @@
-import 'package:cineapp/presentation/providers/movies/movies_providers.dart';
+import 'package:cineapp/presentation/providers/providers.dart';
+import 'package:cineapp/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -13,7 +14,8 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: _HomeView()
-      )
+      ),
+      bottomNavigationBar: CustomBottonNav(),
     );
   }
 }
@@ -36,17 +38,20 @@ class _HomeViewState extends ConsumerState<_HomeView> {
   @override
   Widget build(BuildContext context) {
 
-    final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
+    //final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
+    final slideShowMovies = ref.watch(moviesSlideshowProvider);
 
-
-    return ListView.builder(
-      itemCount: nowPlayingMovies.length,
-      itemBuilder: (context, index){
-        final movie = nowPlayingMovies[index];
-        return ListTile(
-          title: Text(movie.title),
-        );
-      },
+    return Column(
+      children: [
+        CustomAppbar(),
+        MoviesSlideShow(movies: slideShowMovies),
+        MovieHorizontalListview(
+          title: 'En cines', 
+          subtitle: 'Lunes 20', 
+          movies: slideShowMovies,
+          loadNextPage: () => ref.read(nowPlayingMoviesProvider.notifier).loadNextPage()
+          ,)
+      ],
     );
   }
 }
