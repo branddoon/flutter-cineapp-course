@@ -34,14 +34,20 @@ class _HomeViewState extends ConsumerState<_HomeView> {
     super.initState();
     ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
     ref.read(popularMoviesProvider.notifier).loadNextPage();
+    ref.read(topRatedMoviesProvider.notifier).loadNextPage();
+    ref.read(upcomingMoviesProvider.notifier).loadNextPage();
   }
 
   @override
   Widget build(BuildContext context) {
 
+    final initialLoading = ref.watch(initialLoadingProvider);
+    if(initialLoading) return const FullScreenLoader();
     final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
     final slideShowMovies = ref.watch(moviesSlideshowProvider);
     final popularMovies =  ref.watch(popularMoviesProvider);
+    final topRatedMovies = ref.watch(topRatedMoviesProvider);
+    final upcomingMovies = ref.watch(upcomingMoviesProvider);
 
     return CustomScrollView(
       slivers: [
@@ -66,13 +72,18 @@ class _HomeViewState extends ConsumerState<_HomeView> {
                         MovieHorizontalListview(
                           title: 'Proximamente', 
                           subtitle: 'Este mes', 
-                          movies: nowPlayingMovies,
-                          loadNextPage: () => ref.read(nowPlayingMoviesProvider.notifier).loadNextPage()
+                          movies: upcomingMovies,
+                          loadNextPage: () => ref.read(upcomingMoviesProvider.notifier).loadNextPage()
                           ,),
                         MovieHorizontalListview(
                           title: 'Populares', 
                           movies: popularMovies,
                           loadNextPage: () => ref.read(popularMoviesProvider.notifier).loadNextPage()
+                          ,),
+                          MovieHorizontalListview(
+                          title: 'Mejor calificadas', 
+                          movies: topRatedMovies,
+                          loadNextPage: () => ref.read(topRatedMoviesProvider.notifier).loadNextPage()
                           ,),
                           const SizedBox(
                             height: 10,
