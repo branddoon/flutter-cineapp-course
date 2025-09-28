@@ -2,6 +2,7 @@ import 'package:cineapp/config/constants/enviroment.dart';
 import 'package:cineapp/domain/datasources/movies_datasource.dart';
 import 'package:cineapp/domain/entities/movie.dart';
 import 'package:cineapp/infrastructure/mappers/movie_mapper.dart';
+import 'package:cineapp/infrastructure/models/moviedb/movie_details.dart';
 import 'package:cineapp/infrastructure/models/moviedb/moviedb_response.dart';
 import 'package:dio/dio.dart';
 
@@ -59,6 +60,13 @@ class MoviedbDatasource extends MovieDatasource{
         'page': page
     });
     return _jsonToMovies(response.data);
+  }
+  
+  @override
+  Future<Movie> getMovieById(String id) async{
+    final response = await dio.get('/movie/$id');
+    final movieDB = MovieDetails.fromJson(response.data);
+    return MovieMapper.movieDtlsToEntity(movieDB);
   }
   
 }

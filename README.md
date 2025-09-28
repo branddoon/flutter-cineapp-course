@@ -1,16 +1,11 @@
-# cineapp
+# Cineapp - Flutter
 
-A new Flutter project.
+This movie application was created in order to learn about advance concepts of Flutter. 
 
-## Getting Started
+## How to execute 
+In order to execute this proyect, following requirements are needed
 
-This project is a starting point for a Flutter application.
+- Xcode
+- Ios Mobile simulator
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Open proyect in Xcode and execute it using simulator.

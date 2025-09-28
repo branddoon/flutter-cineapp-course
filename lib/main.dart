@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       routerConfig: appRouter,
       debugShowCheckedModeBanner: false,
-      title: 'Cine app',
+      title: '',
       theme: AppTheme().getTheme()
     );
   }
