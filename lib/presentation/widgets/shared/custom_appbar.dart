@@ -1,10 +1,13 @@
+import 'package:cineapp/presentation/delegates/search_movie_delegate.dart';
+import 'package:cineapp/presentation/providers/providers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CustomAppbar extends StatelessWidget {
+class CustomAppbar extends ConsumerWidget {
   const CustomAppbar({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
 
     final colors = Theme.of(context).colorScheme;
 
@@ -22,9 +25,20 @@ class CustomAppbar extends StatelessWidget {
               SizedBox(
                 width: 5,
               ),
-              Text('Cine app', style: titleStyle,),
+              Text('', style: titleStyle,),
               Spacer(),
-              IconButton(onPressed: (){}, icon: Icon(Icons.search))
+              IconButton(
+                onPressed: (){
+
+                  final movieRepository = ref.read(movieRepositoryProvider);
+                 
+                  showSearch(
+                    context: context,
+                    delegate: SearchMovieDelegate(
+                      searchMovies: movieRepository.searchMovies
+                    ));
+                },
+               icon: Icon(Icons.search))
       
             ],
           ),
